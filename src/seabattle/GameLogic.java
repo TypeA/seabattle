@@ -145,7 +145,7 @@ public class GameLogic {
                                 flag = false;
                             }
                         }
-                    } else {                                                                                            //вертикальный, в дюбом столбце, не прижат
+                    } else {                                                                                            //вертикальный, в любом столбце, не прижат
                         for (int i = ship.getYPosition() - 1; i < ship.getSize() + ship.getYPosition() + 1; i++) {
                             if (!(field[i][ship.getXPosition()-1].equals(" ") && field[i][ship.getXPosition()].equals(" ") && field[i][ship.getXPosition()+1].equals(" "))){
                                 flag = false;
