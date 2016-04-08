@@ -20,61 +20,14 @@ public class GameLogic {
                 }
             }
             for (int i = 0; i < cAll; i++) {
-                while (tryCounter < 10 && notPlaced) {
-                    if (i < c4) {
-                        while (notPlaced && tryCounter < 10) {
-                            Main.Ship ship = new Main.Ship(4, (int) (Math.random() * 10), (int) (Math.random() * 10), (String.valueOf((int) (Math.random() * 2)).equals("1")));
-                            if (canBePlaced(field, ship)) {
-                                notPlaced = false;
-                                ships.add(ship);
-                            } else {
-                                ship.setHorizontal(!ship.isHorizontal());
-                                if (canBePlaced(field, ship)) {
-                                    notPlaced = false;
-                                    ships.add(ship);
-                                } else {
-                                    tryCounter++;
-                                }
-                            }
-                        }
-                    }
-                    if ((i<c4+c3)&&(i>c4)) {
-                        while (notPlaced && tryCounter < 10) {
-                            Main.Ship ship = new Main.Ship(3, (int) (Math.random() * 10), (int) (Math.random() * 10), (String.valueOf((int) (Math.random() * 2)).equals("1")));
-                            if (canBePlaced(field, ship)) {
-                                notPlaced = false;
-                                ships.add(ship);
-                            } else {
-                                ship.setHorizontal(!ship.isHorizontal());
-                                if (canBePlaced(field, ship)) {
-                                    notPlaced = false;
-                                    ships.add(ship);
-                                } else {
-                                    tryCounter++;
-                                }
-                            }
-                        }
-                    }
-                    if () {
-                        while (notPlaced && tryCounter < 10) {
-                            Main.Ship ship = new Main.Ship(2, (int) (Math.random() * 10), (int) (Math.random() * 10), (String.valueOf((int) (Math.random() * 2)).equals("1")));
-                            if (canBePlaced(field, ship)) {
-                                notPlaced = false;
-                                ships.add(ship);
-                            } else {
-                                ship.setHorizontal(!ship.isHorizontal());
-                                if (canBePlaced(field, ship)) {
-                                    notPlaced = false;
-                                    ships.add(ship);
-                                } else {
-                                    tryCounter++;
-                                }
-                            }
-                        }
-                    }
-                    if () {
-                        while (notPlaced && tryCounter < 10) {
-                            Main.Ship ship = new Main.Ship(1, (int) (Math.random() * 10), (int) (Math.random() * 10), (String.valueOf((int) (Math.random() * 2)).equals("1")));
+                if (i < c4) {
+                    while (notPlaced && tryCounter < 10) {
+                        Main.Ship ship = new Main.Ship(4, (int) (Math.random() * 10), (int) (Math.random() * 10), (String.valueOf((int) (Math.random() * 2)).equals("1")));
+                        if (canBePlaced(field, ship)) {
+                            notPlaced = false;
+                            ships.add(ship);
+                        } else {
+                            ship.setHorizontal(!ship.isHorizontal());
                             if (canBePlaced(field, ship)) {
                                 notPlaced = false;
                                 ships.add(ship);
@@ -83,16 +36,70 @@ public class GameLogic {
                             }
                         }
                     }
+                } else if ((i < c4 + c3) && (i >= c4)) {
+                    while (notPlaced && tryCounter < 10) {
+                        Main.Ship ship = new Main.Ship(3, (int) (Math.random() * 10), (int) (Math.random() * 10), (String.valueOf((int) (Math.random() * 2)).equals("1")));
+                        if (canBePlaced(field, ship)) {
+                            notPlaced = false;
+                            ships.add(ship);
+                        } else {
+                            ship.setHorizontal(!ship.isHorizontal());
+                            if (canBePlaced(field, ship)) {
+                                notPlaced = false;
+                                ships.add(ship);
+                            } else {
+                                tryCounter++;
+                            }
+                        }
+                    }
+                } else if ((i < c4 + c3 + c2) && (i >= c4 + c3)) {
+                    while (notPlaced && tryCounter < 10) {
+                        Main.Ship ship = new Main.Ship(2, (int) (Math.random() * 10), (int) (Math.random() * 10), (String.valueOf((int) (Math.random() * 2)).equals("1")));
+                        if (canBePlaced(field, ship)) {
+                            notPlaced = false;
+                            ships.add(ship);
+                        } else {
+                            ship.setHorizontal(!ship.isHorizontal());
+                            if (canBePlaced(field, ship)) {
+                                notPlaced = false;
+                                ships.add(ship);
+                            } else {
+                                tryCounter++;
+                            }
+                        }
+                    }
+                } else if ((i < c4 + c3 + c2 + c1) && (i >= c4 + c3 + c2)) {
+                    while (notPlaced && tryCounter < 10) {
+                        Main.Ship ship = new Main.Ship(1, (int) (Math.random() * 10), (int) (Math.random() * 10), (String.valueOf((int) (Math.random() * 2)).equals("1")));
+                        if (canBePlaced(field, ship)) {
+                            notPlaced = false;
+                            ships.add(ship);
+                        } else {
+                            tryCounter++;
+                        }
+                    }
                 }
+                tryCounter = 0;
+                notPlaced = true;
             }
-            if(ships.size()==cAll) {
-                notGemerated=false;
+            if (ships.size() == cAll) {
+                notGemerated = false;
             } else {
                 generateCounter++;
             }
         }
-        System.out.println("\nAll ships are generated!\n");
-        return null;
+        if (notGemerated) {
+            System.out.println("\nI can't place all ships\n");
+        } else {
+            System.out.println("\nAll ships are generated!\n");
+        }
+        for (int i = 0; i <10 ; i++) {
+            for (int j = 0; j <10 ; j++) {
+                System.out.print(" "+field[i][j]);
+            }
+            System.out.println("");
+        }
+        return ships;
     }
 
     private static boolean canBePlaced(String[][] field, Main.Ship ship) {
@@ -235,7 +242,7 @@ public class GameLogic {
         return flag;
     }
 
-    private String[][] placeTheShip(String[][] field, Main.Ship ship) {
+    private static String[][] placeTheShip(String[][] field, Main.Ship ship) {
         if (ship.isHorizontal()) {
             for (int i = ship.getXPosition(); i < ship.getXPosition() + ship.getSize(); i++) {
                 field[ship.getYPosition()][i] = "\u25A0";

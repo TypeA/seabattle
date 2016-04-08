@@ -47,7 +47,6 @@ public class Main {
             return horizontal;
         }
 
-
         public Ship(int size, int yPosition, int xPosition, boolean horizontal) {
             this.size = size;
             this.xPosition = xPosition;
