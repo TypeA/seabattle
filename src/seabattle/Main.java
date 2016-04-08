@@ -18,17 +18,17 @@ public class Main {
         final int count4Deck = 1;
         final int countOfShips = 10;
         ArrayList<Ship> ships = generateShips(countOfShips, count1Deck, count2Deck, count3Deck, count4Deck);
-        printTable(null);
+
     }
 
     static class Ship {
         private int size;
         private int xPosition;
         private int yPosition;
-        private boolean isHorizontal;
+        private boolean horizontal;
 
         public void setHorizontal(boolean horizontal) {
-            isHorizontal = horizontal;
+            this.horizontal = horizontal;
         }
 
         public int getSize() {
@@ -44,16 +44,15 @@ public class Main {
         }
 
         public boolean isHorizontal() {
-            return isHorizontal;
+            return horizontal;
         }
 
 
-
-        public Ship(int size, int yPosition, int xPosition, boolean isHorizontal) {
+        public Ship(int size, int yPosition, int xPosition, boolean horizontal) {
             this.size = size;
             this.xPosition = xPosition;
             this.yPosition = yPosition;
-            this.isHorizontal = isHorizontal;
+            this.horizontal = horizontal;
         }
     }
 }

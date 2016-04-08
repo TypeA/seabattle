@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class GameLogic {
 
     public static ArrayList<Main.Ship> generateShips(int cAll, int c1, int c2, int c3, int c4) {
+        boolean notPlaced = true;
+        int tryCounter=0;
         ArrayList<Main.Ship> ships = new ArrayList<Main.Ship>();
         String[][] field = new String[10][10];
         for (int i = 0; i < 10; i++) {
@@ -12,10 +14,11 @@ public class GameLogic {
                 field[i][j] = " ";
             }
         }
-        Main.Ship ship = new Main.Ship(4, 8, 0, false);
-        System.out.println("Can be placed " + canBePlaced(field, ship));
         for (int i = 0; i < cAll; i++) {
+            while ()
+            if (i < c4) {
 
+            }
         }
         System.out.println("\nAll ships are generated!\n");
         return null;
@@ -135,19 +138,19 @@ public class GameLogic {
                 } else {
                     if (ship.getYPosition() == field.length - ship.getSize()) {                                          //вертикальный, в любом столбце, прижат вниз
                         for (int i = ship.getYPosition() - 1; i < field.length; i++) {
-                            if (!(field[i][ship.getXPosition()-1].equals(" ") && field[i][ship.getXPosition()].equals(" ") && field[i][ship.getXPosition()+1].equals(" "))) {
+                            if (!(field[i][ship.getXPosition() - 1].equals(" ") && field[i][ship.getXPosition()].equals(" ") && field[i][ship.getXPosition() + 1].equals(" "))) {
                                 flag = false;
                             }
                         }
                     } else if (ship.getYPosition() == 0) {                                                               //вертикальный, в любом столбце, прижат наверх
                         for (int i = 0; i < ship.getSize() + 1; i++) {
-                            if (!(field[i][ship.getXPosition()-1].equals(" ") && field[i][ship.getXPosition()].equals(" ") && field[i][ship.getXPosition()+1].equals(" "))) {
+                            if (!(field[i][ship.getXPosition() - 1].equals(" ") && field[i][ship.getXPosition()].equals(" ") && field[i][ship.getXPosition() + 1].equals(" "))) {
                                 flag = false;
                             }
                         }
                     } else {                                                                                            //вертикальный, в любом столбце, не прижат
                         for (int i = ship.getYPosition() - 1; i < ship.getSize() + ship.getYPosition() + 1; i++) {
-                            if (!(field[i][ship.getXPosition()-1].equals(" ") && field[i][ship.getXPosition()].equals(" ") && field[i][ship.getXPosition()+1].equals(" "))){
+                            if (!(field[i][ship.getXPosition() - 1].equals(" ") && field[i][ship.getXPosition()].equals(" ") && field[i][ship.getXPosition() + 1].equals(" "))) {
                                 flag = false;
                             }
                         }
@@ -159,6 +162,19 @@ public class GameLogic {
             }
         }
         return flag;
+    }
+
+    private String[][] placeTheShip(String[][] field, Main.Ship ship) {
+        if (ship.isHorizontal()) {
+            for (int i = ship.getXPosition(); i < ship.getXPosition() + ship.getSize(); i++) {
+                field[ship.getYPosition()][i] = "\u25A0";
+            }
+        } else {
+            for (int i = ship.getYPosition(); i < ship.getYPosition() + ship.getSize(); i++) {
+                field[i][ship.getXPosition()] = "\u25A0";
+            }
+        }
+        return field;
     }
 
     public static void printTable(ArrayList<Main.Ship> ships) {
