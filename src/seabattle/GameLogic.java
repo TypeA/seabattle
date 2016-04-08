@@ -6,18 +6,89 @@ public class GameLogic {
 
     public static ArrayList<Main.Ship> generateShips(int cAll, int c1, int c2, int c3, int c4) {
         boolean notPlaced = true;
-        int tryCounter=0;
+        int tryCounter = 0;
+        boolean notGemerated = true;
+        int generateCounter = 0;
         ArrayList<Main.Ship> ships = new ArrayList<Main.Ship>();
         String[][] field = new String[10][10];
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                field[i][j] = " ";
-            }
-        }
-        for (int i = 0; i < cAll; i++) {
-            while ()
-            if (i < c4) {
 
+
+        while (notGemerated && generateCounter < 5) {
+            for (int i = 0; i < 10; i++) {
+                for (int j = 0; j < 10; j++) {
+                    field[i][j] = " ";
+                }
+            }
+            for (int i = 0; i < cAll; i++) {
+                while (tryCounter < 10 && notPlaced) {
+                    if (i < c4) {
+                        while (notPlaced && tryCounter < 10) {
+                            Main.Ship ship = new Main.Ship(4, (int) (Math.random() * 10), (int) (Math.random() * 10), (String.valueOf((int) (Math.random() * 2)).equals("1")));
+                            if (canBePlaced(field, ship)) {
+                                notPlaced = false;
+                                ships.add(ship);
+                            } else {
+                                ship.setHorizontal(!ship.isHorizontal());
+                                if (canBePlaced(field, ship)) {
+                                    notPlaced = false;
+                                    ships.add(ship);
+                                } else {
+                                    tryCounter++;
+                                }
+                            }
+                        }
+                    }
+                    if ((i<c4+c3)&&(i>c4)) {
+                        while (notPlaced && tryCounter < 10) {
+                            Main.Ship ship = new Main.Ship(3, (int) (Math.random() * 10), (int) (Math.random() * 10), (String.valueOf((int) (Math.random() * 2)).equals("1")));
+                            if (canBePlaced(field, ship)) {
+                                notPlaced = false;
+                                ships.add(ship);
+                            } else {
+                                ship.setHorizontal(!ship.isHorizontal());
+                                if (canBePlaced(field, ship)) {
+                                    notPlaced = false;
+                                    ships.add(ship);
+                                } else {
+                                    tryCounter++;
+                                }
+                            }
+                        }
+                    }
+                    if () {
+                        while (notPlaced && tryCounter < 10) {
+                            Main.Ship ship = new Main.Ship(2, (int) (Math.random() * 10), (int) (Math.random() * 10), (String.valueOf((int) (Math.random() * 2)).equals("1")));
+                            if (canBePlaced(field, ship)) {
+                                notPlaced = false;
+                                ships.add(ship);
+                            } else {
+                                ship.setHorizontal(!ship.isHorizontal());
+                                if (canBePlaced(field, ship)) {
+                                    notPlaced = false;
+                                    ships.add(ship);
+                                } else {
+                                    tryCounter++;
+                                }
+                            }
+                        }
+                    }
+                    if () {
+                        while (notPlaced && tryCounter < 10) {
+                            Main.Ship ship = new Main.Ship(1, (int) (Math.random() * 10), (int) (Math.random() * 10), (String.valueOf((int) (Math.random() * 2)).equals("1")));
+                            if (canBePlaced(field, ship)) {
+                                notPlaced = false;
+                                ships.add(ship);
+                            } else {
+                                tryCounter++;
+                            }
+                        }
+                    }
+                }
+            }
+            if(ships.size()==cAll) {
+                notGemerated=false;
+            } else {
+                generateCounter++;
             }
         }
         System.out.println("\nAll ships are generated!\n");
