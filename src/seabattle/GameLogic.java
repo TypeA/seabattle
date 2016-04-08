@@ -96,16 +96,11 @@ public class GameLogic {
         }
         if (notGenerated) {
             System.out.println("\nI can't place all ships\n");
+            return null;
         } else {
             System.out.println("\nAll ships are generated!\n");
+            return ships;
         }
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                System.out.print(" " + field[i][j]);
-            }
-            System.out.println("");
-        }
-        return ships;
     }
 
     private static boolean canBePlaced(String[][] field, Main.Ship ship) {
