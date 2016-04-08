@@ -9,9 +9,9 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.print("This is sea battle game!\nPlease enter your name:");
-        Scanner s = new Scanner(System.in);
-        String playerName = s.nextLine();
-        System.out.println("Hi, " + playerName + "!");
+       // Scanner s = new Scanner(System.in);
+     //  String playerName = s.nextLine();
+     //   System.out.println("Hi, " + playerName + "!");
         final int count1Deck = 4;
         final int count2Deck = 3;
         final int count3Deck = 2;

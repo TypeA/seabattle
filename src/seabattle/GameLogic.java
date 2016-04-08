@@ -7,13 +7,11 @@ public class GameLogic {
     public static ArrayList<Main.Ship> generateShips(int cAll, int c1, int c2, int c3, int c4) {
         boolean notPlaced = true;
         int tryCounter = 0;
-        boolean notGemerated = true;
+        boolean notGenerated = true;
         int generateCounter = 0;
         ArrayList<Main.Ship> ships = new ArrayList<Main.Ship>();
         String[][] field = new String[10][10];
-
-
-        while (notGemerated && generateCounter < 5) {                                                                   //цикл формирования всего поля
+        while (notGenerated && generateCounter < 5) {                                                                   //цикл формирования всего поля
             for (int i = 0; i < 10; i++) {                                                                              //создание пустого поля
                 for (int j = 0; j < 10; j++) {
                     field[i][j] = " ";
@@ -26,13 +24,13 @@ public class GameLogic {
                         if (canBePlaced(field, ship)) {                                                                 //проверка на возможность размещения
                             notPlaced = false;
                             ships.add(ship);
-                            field=placeTheShip(field,ship);
+                            field = placeTheShip(field, ship);
                         } else {
                             ship.setHorizontal(!ship.isHorizontal());                                                   //вращение корабля
                             if (canBePlaced(field, ship)) {
                                 notPlaced = false;
                                 ships.add(ship);
-                                field=placeTheShip(field,ship);
+                                field = placeTheShip(field, ship);
                             } else {
                                 tryCounter++;
                             }
@@ -44,13 +42,13 @@ public class GameLogic {
                         if (canBePlaced(field, ship)) {
                             notPlaced = false;
                             ships.add(ship);
-                            field=placeTheShip(field,ship);
+                            field = placeTheShip(field, ship);
                         } else {
                             ship.setHorizontal(!ship.isHorizontal());
                             if (canBePlaced(field, ship)) {
                                 notPlaced = false;
                                 ships.add(ship);
-                                field=placeTheShip(field,ship);
+                                field = placeTheShip(field, ship);
                             } else {
                                 tryCounter++;
                             }
@@ -62,13 +60,13 @@ public class GameLogic {
                         if (canBePlaced(field, ship)) {
                             notPlaced = false;
                             ships.add(ship);
-                            field=placeTheShip(field,ship);
+                            field = placeTheShip(field, ship);
                         } else {
                             ship.setHorizontal(!ship.isHorizontal());
                             if (canBePlaced(field, ship)) {
                                 notPlaced = false;
                                 ships.add(ship);
-                                field=placeTheShip(field,ship);
+                                field = placeTheShip(field, ship);
                             } else {
                                 tryCounter++;
                             }
@@ -80,7 +78,7 @@ public class GameLogic {
                         if (canBePlaced(field, ship)) {
                             notPlaced = false;
                             ships.add(ship);
-                            field=placeTheShip(field,ship);
+                            field = placeTheShip(field, ship);
                         } else {
                             tryCounter++;
                         }
@@ -90,20 +88,20 @@ public class GameLogic {
                 notPlaced = true;
             }
             if (ships.size() == cAll) {
-                notGemerated = false;
+                notGenerated = false;
             } else {
                 generateCounter++;
+                ships.clear();
             }
-            System.out.println(generateCounter);
         }
-        if (notGemerated) {
+        if (notGenerated) {
             System.out.println("\nI can't place all ships\n");
         } else {
             System.out.println("\nAll ships are generated!\n");
         }
-        for (int i = 0; i <10 ; i++) {
-            for (int j = 0; j <10 ; j++) {
-                System.out.print(" "+field[i][j]);
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                System.out.print(" " + field[i][j]);
             }
             System.out.println("");
         }
@@ -253,11 +251,11 @@ public class GameLogic {
     private static String[][] placeTheShip(String[][] field, Main.Ship ship) {
         if (ship.isHorizontal()) {
             for (int i = ship.getXPosition(); i < ship.getXPosition() + ship.getSize(); i++) {
-                field[ship.getYPosition()][i] = "X";
+                field[ship.getYPosition()][i] = "\u25A0";
             }
         } else {
             for (int i = ship.getYPosition(); i < ship.getYPosition() + ship.getSize(); i++) {
-                field[i][ship.getXPosition()] = "X";
+                field[i][ship.getXPosition()] = "\u25A0";
             }
         }
         return field;
