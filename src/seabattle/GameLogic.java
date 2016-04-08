@@ -13,67 +13,74 @@ public class GameLogic {
         String[][] field = new String[10][10];
 
 
-        while (notGemerated && generateCounter < 5) {
-            for (int i = 0; i < 10; i++) {
+        while (notGemerated && generateCounter < 5) {                                                                   //цикл формирования всего поля
+            for (int i = 0; i < 10; i++) {                                                                              //создание пустого поля
                 for (int j = 0; j < 10; j++) {
                     field[i][j] = " ";
                 }
             }
-            for (int i = 0; i < cAll; i++) {
-                if (i < c4) {
-                    while (notPlaced && tryCounter < 10) {
+            for (int i = 0; i < cAll; i++) {                                                                            //цикл создания всех кораблей
+                if (i < c4) {                                                                                           //для 4х палубника
+                    while (notPlaced && tryCounter < 10) {                                                              //цикл попыток сгенерировать правильный корабль
                         Main.Ship ship = new Main.Ship(4, (int) (Math.random() * 10), (int) (Math.random() * 10), (String.valueOf((int) (Math.random() * 2)).equals("1")));
-                        if (canBePlaced(field, ship)) {
+                        if (canBePlaced(field, ship)) {                                                                 //проверка на возможность размещения
                             notPlaced = false;
                             ships.add(ship);
+                            field=placeTheShip(field,ship);
                         } else {
-                            ship.setHorizontal(!ship.isHorizontal());
+                            ship.setHorizontal(!ship.isHorizontal());                                                   //вращение корабля
                             if (canBePlaced(field, ship)) {
                                 notPlaced = false;
                                 ships.add(ship);
+                                field=placeTheShip(field,ship);
                             } else {
                                 tryCounter++;
                             }
                         }
                     }
-                } else if ((i < c4 + c3) && (i >= c4)) {
+                } else if ((i < c4 + c3) && (i >= c4)) {                                                                //для трехпалубника
                     while (notPlaced && tryCounter < 10) {
                         Main.Ship ship = new Main.Ship(3, (int) (Math.random() * 10), (int) (Math.random() * 10), (String.valueOf((int) (Math.random() * 2)).equals("1")));
                         if (canBePlaced(field, ship)) {
                             notPlaced = false;
                             ships.add(ship);
+                            field=placeTheShip(field,ship);
                         } else {
                             ship.setHorizontal(!ship.isHorizontal());
                             if (canBePlaced(field, ship)) {
                                 notPlaced = false;
                                 ships.add(ship);
+                                field=placeTheShip(field,ship);
                             } else {
                                 tryCounter++;
                             }
                         }
                     }
-                } else if ((i < c4 + c3 + c2) && (i >= c4 + c3)) {
+                } else if ((i < c4 + c3 + c2) && (i >= c4 + c3)) {                                                      //для двухпалубника
                     while (notPlaced && tryCounter < 10) {
                         Main.Ship ship = new Main.Ship(2, (int) (Math.random() * 10), (int) (Math.random() * 10), (String.valueOf((int) (Math.random() * 2)).equals("1")));
                         if (canBePlaced(field, ship)) {
                             notPlaced = false;
                             ships.add(ship);
+                            field=placeTheShip(field,ship);
                         } else {
                             ship.setHorizontal(!ship.isHorizontal());
                             if (canBePlaced(field, ship)) {
                                 notPlaced = false;
                                 ships.add(ship);
+                                field=placeTheShip(field,ship);
                             } else {
                                 tryCounter++;
                             }
                         }
                     }
-                } else if ((i < c4 + c3 + c2 + c1) && (i >= c4 + c3 + c2)) {
+                } else if ((i < c4 + c3 + c2 + c1) && (i >= c4 + c3 + c2)) {                                            //для однопалубника
                     while (notPlaced && tryCounter < 10) {
                         Main.Ship ship = new Main.Ship(1, (int) (Math.random() * 10), (int) (Math.random() * 10), (String.valueOf((int) (Math.random() * 2)).equals("1")));
                         if (canBePlaced(field, ship)) {
                             notPlaced = false;
                             ships.add(ship);
+                            field=placeTheShip(field,ship);
                         } else {
                             tryCounter++;
                         }
@@ -87,6 +94,7 @@ public class GameLogic {
             } else {
                 generateCounter++;
             }
+            System.out.println(generateCounter);
         }
         if (notGemerated) {
             System.out.println("\nI can't place all ships\n");
@@ -245,11 +253,11 @@ public class GameLogic {
     private static String[][] placeTheShip(String[][] field, Main.Ship ship) {
         if (ship.isHorizontal()) {
             for (int i = ship.getXPosition(); i < ship.getXPosition() + ship.getSize(); i++) {
-                field[ship.getYPosition()][i] = "\u25A0";
+                field[ship.getYPosition()][i] = "X";
             }
         } else {
             for (int i = ship.getYPosition(); i < ship.getYPosition() + ship.getSize(); i++) {
-                field[i][ship.getXPosition()] = "\u25A0";
+                field[i][ship.getXPosition()] = "X";
             }
         }
         return field;
