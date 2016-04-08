@@ -195,7 +195,7 @@ public class GameLogic {
                         }
                     } else {                                                                                            //вертикальный, в 0 столбце, не прижат
                         for (int i = ship.getYPosition() - 1; i < ship.getSize() + ship.getYPosition() + 1; i++) {
-                            if (!(field[i][0].equals("\u25A1") && (field[i][0].equals("\u25A1")))) {
+                            if (!(field[i][0].equals("\u25A1") && (field[i][1].equals("\u25A1")))) {
                                 flag = false;
                             }
                         }
